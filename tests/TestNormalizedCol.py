@@ -12,9 +12,6 @@ class TestNormalizedCol(unittest.TestCase):
         )
         self.unnormalizedData=pd.DataFrame(dictionaryForDf)
        
-
-        print("TYPE OF DF: " + str(self.unnormalizedData))
-
         self.expectedLastNormalizedDataFromCol1= 1.000000
         self.normalizer = Normalizer(dictionaryForDf)
 
@@ -24,9 +21,9 @@ class TestNormalizedCol(unittest.TestCase):
         lastElementIndex = len(normalizedDf[column]) - 1
         lastElementInNormalizedDfCol1 = normalizedDf[column][lastElementIndex]
         decimalPlaces = 2
+        
+        self.assertAlmostEqual(lastElementInNormalizedDfCol1, self.expectedLastNormalizedDataFromCol1, decimalPlaces, "assertRan" )
 
-        print("test_normalize")
 
-        self.assertAlmostEqual(lastElementInNormalizedDfCol1, self.expectedLastNormalizedDataFromCol1, decimalPlaces, "assertRan" )    
     def run(self):
         self.test_normalize()
