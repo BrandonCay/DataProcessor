@@ -9,8 +9,6 @@ class Normalizer:
     def normalize(self, strColumnName=""):
         column = strColumnName
 
-        print("HNT" + str(self.__dfUnnormalized))
-
         df_min_max_scaled = self.__dfUnnormalized
         df_min_max_scaled[column] = (df_min_max_scaled[column] - df_min_max_scaled[column].min()) / (df_min_max_scaled[column].max() - df_min_max_scaled[column].min())
         return df_min_max_scaled

@@ -22,7 +22,7 @@ class TestNormalizedCol(unittest.TestCase):
         lastElementInNormalizedDfCol1 = normalizedDf[column][lastElementIndex]
         decimalPlaces = 2
         
-        self.assertAlmostEqual(lastElementInNormalizedDfCol1, self.expectedLastNormalizedDataFromCol1, decimalPlaces, "assertRan" )
+        self.assertAlmostEqual(lastElementInNormalizedDfCol1, self.expectedLastNormalizedDataFromCol1, decimalPlaces, "NOT EQUAL" )
 
 
     def run(self):
