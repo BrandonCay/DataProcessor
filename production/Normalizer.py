@@ -1,23 +1,21 @@
 import pandas as pd
 
 class Normalizer:
-    def __init__(self, dictionaryForDf):
-        self.__dfUnnormalized = pd.DataFrame()
+    def __init__(self, listForSeries=[]):
+        self.sUnnormalized = pd.Series()
+        self.set_sUnnormalized(listForSeries)
 
-        self.set_dfUnnormalized(dictionaryForDf)
+    def normalize(self):
+        s_min_max_scaled = self.__sUnnormalized
+        s_min_max_scaled = (s_min_max_scaled - s_min_max_scaled.min()) / (s_min_max_scaled.max() - s_min_max_scaled.min())
+        return s_min_max_scaled
 
-    def normalize(self, strColumnName=""):
-        column = strColumnName
 
-        df_min_max_scaled = self.__dfUnnormalized
-        df_min_max_scaled[column] = (df_min_max_scaled[column] - df_min_max_scaled[column].min()) / (df_min_max_scaled[column].max() - df_min_max_scaled[column].min())
-        return df_min_max_scaled
-
-    def set_dfUnnormalized(self, df):
+    def set_sUnnormalized(self, s):
         try:
-            if isinstance(df, pd.DataFrame):
+            if isinstance(s, pd.Series):
                 raise TypeError
 
-            self.__dfUnnormalized = pd.DataFrame(df)
-        except TypeError as T:
-            print(f"Object passed is not a DataFrame. Object is:{str(df)}" )
+            self.__sUnnormalized = pd.Series(s)
+        except TypeError:
+            print(f"Object passed is not a Series. Object is:{str(s)}" )
