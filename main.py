@@ -10,10 +10,10 @@ NOTE:
 No. of Iteration: 13 gets converted to 12.5
 """
 def main():
-    i=0
-    for colName in columnsList:
-        if(i==0):
-            i+=1
+    i=-1
+    for colName in columnsList:            
+        i+=1
+        if(i==0 or i>=20):
             continue
         colList = getColAsList(colName,1,34)
         normalizerObj = Normalizer(colList)
