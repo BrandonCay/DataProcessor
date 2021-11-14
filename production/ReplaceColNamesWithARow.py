@@ -1,9 +1,12 @@
 import pandas as pd
 from collections import defaultdict
+from production.defaultLoggingConfig import defaultLoggingConfig
+logging = defaultLoggingConfig(__file__)
+
 
 
 class ReplaceColNamesWithARow:
-    def __init__(self, df : pd.DateFrame, indexOfRowToUseForReplacement = 0):
+    def __init__(self, df : pd.DataFrame, indexOfRowToUseForReplacement = 0):
         self.__df = df
         self.__indexOfRowToUseForReplacement = indexOfRowToUseForReplacement
     def set_indexOfRowToUseForReplacement(self, newIndex : int):
@@ -19,7 +22,8 @@ class ReplaceColNamesWithARow:
         
     
     def __get_newColNames(self) -> list:
-        return self.__df.iloc[[self.__indexOfRowToUseForReplacement]]
+        print()
+        return list(self.__df.iloc[[self.__indexOfRowToUseForReplacement]])
     
     def __get_dfAfterRowDropped(self) -> pd.DataFrame:
         return self.__df.drop(self.__indexOfRowToUseForReplacement)
@@ -27,9 +31,11 @@ class ReplaceColNamesWithARow:
     def __makeDictOfOldColNamesToNewColNames(self, newColNames : list) -> dict:
         oldColNames = list(self.__df.columns)
         oldNamesToNewNames = defaultdict(lambda : "not a key")
+        logging.debug("MESSAGE: " + str(oldColNames) )
+
         lenOfOldColNames = len(oldColNames)
         
-        for indexOfOldColName in lenOfOldColNames:
+        for indexOfOldColName in range(lenOfOldColNames):
             oldColName = oldColNames[indexOfOldColName]
             newColName = newColNames[indexOfOldColName]
             oldNamesToNewNames[oldColName] = newColName

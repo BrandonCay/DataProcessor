@@ -9,12 +9,12 @@ class TestPandasAssertEqualGivenSelf(unittest.TestCase):
     def test_compareSelfToSelf(self):
         assert_frame_equal(self.__testDataDf, self.__testDataDf)
     
-    def test_compareIntSelfToFloatSelf(self):
+    def test_compareValOfIntSelfToFloatSelf(self):
         df = self.__testDataDf * 1.00
         assert_frame_equal(self.__testDataDf, df, check_dtype=False )
     def run(self):
         self.test_compareSelfToSelf()
-        self.test_compareIntSelfToFloatSelf()
+        self.test_compareValOfIntSelfToFloatSelf()
 
     
     
