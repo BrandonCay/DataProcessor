@@ -9,21 +9,26 @@ class ReplaceColNamesWithARow:
     def __init__(self, df : pd.DataFrame, indexOfRowToUseForReplacement = 0):
         self.__df = df
         self.__indexOfRowToUseForReplacement = indexOfRowToUseForReplacement
+
     def set_indexOfRowToUseForReplacement(self, newIndex : int):
         self.__indexOfRowToUseForReplacement= newIndex
     
     def replaceColNamesWithARow(self) -> pd.DataFrame:
         newColNames = self.__get_newColNames()
+        
+        log.debug(newColNames)
+
         newDf = self.__get_dfAfterRowDropped()
         oldNamesToNewNames = self.__makeDictOfOldColNamesToNewColNames(newColNames)
         newDf = newDf.rename(columns=oldNamesToNewNames)
-        log.debug()
+
+        log.debug(oldNamesToNewNames)
+        
         return newDf
         
         
     
     def __get_newColNames(self) -> list:
-        print()
         return list(self.__df.iloc[[self.__indexOfRowToUseForReplacement]])
     
     def __get_dfAfterRowDropped(self) -> pd.DataFrame:
@@ -32,6 +37,7 @@ class ReplaceColNamesWithARow:
     def __makeDictOfOldColNamesToNewColNames(self, newColNames : list) -> dict:
         oldColNames = list(self.__df.columns)
         oldNamesToNewNames = defaultdict(lambda : "not a key")
+
         log.debug("MESSAGE: " + str(oldColNames) )
 
         lenOfOldColNames = len(oldColNames)
