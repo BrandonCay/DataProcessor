@@ -1,8 +1,8 @@
 import pandas as pd
 from collections import defaultdict
-from production.defaultLoggingConfig import defaultLoggingConfig
-logging = defaultLoggingConfig(__file__)
-
+import logging
+from production.defaultSetupLogger import defaultSetupLogger
+log = defaultSetupLogger(__file__)
 
 
 class ReplaceColNamesWithARow:
@@ -17,6 +17,7 @@ class ReplaceColNamesWithARow:
         newDf = self.__get_dfAfterRowDropped()
         oldNamesToNewNames = self.__makeDictOfOldColNamesToNewColNames(newColNames)
         newDf = newDf.rename(columns=oldNamesToNewNames)
+        log.debug()
         return newDf
         
         
@@ -31,7 +32,7 @@ class ReplaceColNamesWithARow:
     def __makeDictOfOldColNamesToNewColNames(self, newColNames : list) -> dict:
         oldColNames = list(self.__df.columns)
         oldNamesToNewNames = defaultdict(lambda : "not a key")
-        logging.debug("MESSAGE: " + str(oldColNames) )
+        log.debug("MESSAGE: " + str(oldColNames) )
 
         lenOfOldColNames = len(oldColNames)
         

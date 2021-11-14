@@ -2,6 +2,9 @@ import unittest
 from pandas.testing import assert_frame_equal
 import pandas as pd
 from production.ReplaceColNamesWithARow import ReplaceColNamesWithARow
+import logging
+from production.defaultSetupLogger import defaultSetupLogger
+log = defaultSetupLogger(__file__)
 
 class TestReplaceColumnNameGivenWrongColumnNames(unittest.TestCase):
     def __init__(self):
@@ -12,8 +15,8 @@ class TestReplaceColumnNameGivenWrongColumnNames(unittest.TestCase):
         rcnObj = ReplaceColNamesWithARow(self.__givenDf)
         newDf = rcnObj.replaceColNamesWithARow()
 
-        print(newDf, self.__expectedDf)
-
+        log.debug(newDf)
+        log.debug(self.__expectedDf )
         assert_frame_equal(newDf, self.__expectedDf)
 
     def run(self):
