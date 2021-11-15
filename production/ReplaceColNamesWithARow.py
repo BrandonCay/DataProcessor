@@ -7,7 +7,7 @@ log = defaultSetupLogger(__file__)
 
 class ReplaceColNamesWithARow:
     def __init__(self, df : pd.DataFrame, indexOfRowToUseForReplacement = 0):
-        self.__df = df
+        self.__df = pd.DataFrame(df)
         self.__indexOfRowToUseForReplacement = indexOfRowToUseForReplacement
 
     def set_indexOfRowToUseForReplacement(self, newIndex : int):
@@ -20,15 +20,19 @@ class ReplaceColNamesWithARow:
 
         newDf = self.__get_dfAfterRowDropped()
         oldNamesToNewNames = self.__makeDictOfOldColNamesToNewColNames(newColNames)
+        newDf = self.__resetIndex(newDf)
         newDf = newDf.rename(columns=oldNamesToNewNames)
+
 
         log.debug(oldNamesToNewNames)
         
         return newDf
         
-        
     
     def __get_newColNames(self) -> list:
+        log.debug("DF with new columns: ")
+        log.debug(self.__df)
+
         return list(self.__df.iloc[[self.__indexOfRowToUseForReplacement]])
     
     def __get_dfAfterRowDropped(self) -> pd.DataFrame:
@@ -38,7 +42,8 @@ class ReplaceColNamesWithARow:
         oldColNames = list(self.__df.columns)
         oldNamesToNewNames = defaultdict(lambda : "not a key")
 
-        log.debug("MESSAGE: " + str(oldColNames) )
+        log.debug("OLDNAMES: " + str(oldColNames) )
+        log.debug("NEW NAMES: " + str(newColNames))
 
         lenOfOldColNames = len(oldColNames)
         
@@ -48,6 +53,10 @@ class ReplaceColNamesWithARow:
             oldNamesToNewNames[oldColName] = newColName
 
         return oldNamesToNewNames
+    
+    def __resetIndex(self, newDf : pd.DataFrame) -> pd.DataFrame:
+        return newDf.reset_index(drop = True)
+        
         
         
 

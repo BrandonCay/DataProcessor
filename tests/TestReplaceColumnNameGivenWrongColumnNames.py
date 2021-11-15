@@ -2,7 +2,6 @@ import unittest
 from pandas.testing import assert_frame_equal
 import pandas as pd
 from production.ReplaceColNamesWithARow import ReplaceColNamesWithARow
-import logging
 from production.defaultSetupLogger import defaultSetupLogger
 log = defaultSetupLogger(__file__)
 
@@ -12,7 +11,7 @@ class TestReplaceColumnNameGivenWrongColumnNames(unittest.TestCase):
         self.__givenDf= pd.DataFrame({'Unnamed: 0':['col1',1,1,1]})
 
     def test_replaceHeaders(self):
-        rcnObj = ReplaceColNamesWithARow(self.__givenDf)
+        rcnObj = ReplaceColNamesWithARow(self.__givenDf, 1)
         newDf = rcnObj.replaceColNamesWithARow()
 
         log.debug(newDf)
