@@ -14,26 +14,45 @@ class ReplaceColNamesWithARow:
         self.__indexOfRowToUseForReplacement= newIndex
     
     def replaceColNamesWithARow(self) -> pd.DataFrame:
+
+        log.debug("CHECK TYPE OF DF:\n" + self.__df.dtypes.to_string())
+
         newColNames = self.__get_newColNames()
+
+        log.debug("CHECK TYPE OF DF:\n" + self.__df.dtypes.to_string())
         
-        log.debug(newColNames)
+        log.debug("NEW COLUMN NAMES: "  + str(newColNames))
+
 
         newDf = self.__get_dfAfterRowDropped()
+
+        log.debug("CHECK TYPE OF DF:\n" + newDf.to_string())
+
         oldNamesToNewNames = self.__makeDictOfOldColNamesToNewColNames(newColNames)
         newDf = self.__resetIndex(newDf)
+
+        log.debug("CHECK TYPE OF DF:\n" + newDf.to_string())
+
         newDf = newDf.rename(columns=oldNamesToNewNames)
 
-
+        log.debug("CHECK TYPE OF DF:\n" + newDf.dtypes.to_string())
         log.debug(oldNamesToNewNames)
+
+        newDf = newDf.infer_objects()
         
+        log.debug("CHECK TYPE OF DF:\n" + newDf.dtypes.to_string())
+        log.debug("CHECK DF AFTER infer:\n" +  newDf.to_string())
+
         return newDf
         
     
     def __get_newColNames(self) -> list:
-        log.debug("DF with new columns: ")
-        log.debug(self.__df)
-
-        return list(self.__df.iloc[[self.__indexOfRowToUseForReplacement]])
+        names = pd.Series(self.__df.iloc[self.__indexOfRowToUseForReplacement, :])
+        log.debug("Names after df slice:\n" + names.to_string())
+        names = names.iloc[:]
+        log.debug("Names after s slice:\n" + names.to_string())
+        
+        return list(names)
     
     def __get_dfAfterRowDropped(self) -> pd.DataFrame:
         return self.__df.drop(self.__indexOfRowToUseForReplacement)

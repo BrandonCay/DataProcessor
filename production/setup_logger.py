@@ -3,9 +3,9 @@ import os
 from data.absolutePathToLog import absolutePathToLog
 
 def setup_logger(logger_name, log_file, level=logging.DEBUG):
+    logging.StreamHandler(stream=None)
     log_file = os.path.basename(log_file)
     absolutePathOfFile = rf'{absolutePathToLog}\{log_file}'
-    print("ABS: " + absolutePathOfFile)
     log_file = absolutePathOfFile
     l = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(lineno)d : %(asctime)s : %(message)s')
