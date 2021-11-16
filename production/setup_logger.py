@@ -1,6 +1,6 @@
 import logging
 import os
-from data.absolutePathToLog import absolutePathToLog
+from data.paths import absolutePathToLog
 
 def setup_logger(logger_name, log_file, level=logging.DEBUG):
     logging.StreamHandler(stream=None)
