@@ -8,7 +8,19 @@ log = defaultSetupLogger(__file__)
 class DataProcessorForData_2021_11_15(absDataProcessor):
     def __init__(self, unprocessed : pd.DataFrame) -> None:
         super().__init__(unprocessed)
-    
+
+
+    def process_2021_11_16(self) -> pd.DataFrame:
+        unprocessed = self.get_unprocessed()
+
+        unprocessed = self.__operation_2021_11_16(unprocessed)
+        unprocessed = self.__spellCorrect(unprocessed)
+        unprocessed = self.__dropUnnecessaryCols(unprocessed)
+
+        processed = unprocessed
+
+        return processed
+
     def process(self) -> pd.DataFrame:
         unprocessed = self.get_unprocessed()
         
@@ -30,8 +42,6 @@ class DataProcessorForData_2021_11_15(absDataProcessor):
 
         log.debug(processed[colToNormalize])
 
-        
-
         return processed
     
     def __normalize(self, unprocessed: pd.DataFrame) -> pd.DataFrame:
@@ -42,6 +52,14 @@ class DataProcessorForData_2021_11_15(absDataProcessor):
         unprocessed[colNameToNormalize] = normalizedCol
         return unprocessed
     
+    def __operation_2021_11_16(self, unprocessed: pd.DataFrame) -> pd.DataFrame:
+        colNameToOperateOn="repeating time"
+        colSeriesToOperateOn = unprocessed[colNameToOperateOn]
+        maxOfCol = colSeriesToOperateOn.max()
+        unprocessed[colNameToOperateOn] = colSeriesToOperateOn/maxOfCol
+        return unprocessed
+        
+
     def __spellCorrect(self,unprocessed: pd.DataFrame) -> pd.DataFrame:
         colNameToCaseAndSpellCorrect = "Ajusted execution time"
         colNameAfterCorrection = "adjusted execution time"

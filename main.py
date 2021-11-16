@@ -6,6 +6,7 @@ from production.ReplaceColNamesWithARow import ReplaceColNamesWithARow
 from production.DataProcessorForData_2021_11_15 import DataProcessorForData_2021_11_15
 from production.dfViewMethods import printCols
 
+
 log = defaultSetupLogger(__file__)
 
 
@@ -19,7 +20,7 @@ No. of Iteration: 13 gets converted to 12.5
 def main():
     unprocessed = pd.read_csv(pathToCsvFile_2021_11_15)
     dataProcessor = DataProcessorForData_2021_11_15(unprocessed)
-    processed = dataProcessor.process()
+    processed = dataProcessor.process_2021_11_16()
     printCols(processed, processed.columns)
     nameOfFile = "2021_11_16_processedData"
     exportFile(processed, nameOfFile)
