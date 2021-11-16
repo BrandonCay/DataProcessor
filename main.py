@@ -18,10 +18,11 @@ No. of Iteration: 13 gets converted to 12.5
 
 def main():
     unprocessed = pd.read_csv(pathToCsvFile_2021_11_15)
-    log.debug(unprocessed.describe())
-    printCols(unprocessed, unprocessed.columns)
     dataProcessor = DataProcessorForData_2021_11_15(unprocessed)
-    newDf = dataProcessor.process()
+    processed = dataProcessor.process()
+    printCols(processed, processed.columns)
+    nameOfFile = "2021_11_16_processedData"
+    exportFile(processed, nameOfFile)
     
 
 def exportFile(processed: pd.DataFrame , nameOfFile : str) -> None:

@@ -11,7 +11,7 @@ class DataProcessorNewAttr(absDataProcessor):
         super().__init__(self, df)
     
     def process(self) -> pd.DataFrame:
-        unprocessed = self.__unprocessed
+        unprocessed = self.get_unprocessed()
         unprocessed = unprocessed.dropna(how='all', axis=1)
         unprocessed = unprocessed.dropna(how='all', axis=0)
 
@@ -47,9 +47,13 @@ class DataProcessorNewAttr(absDataProcessor):
 
         printColsList(unprocessed)
 
-        columnWithStringValsIndex = ""
-
         log.debug(unprocessed[:3])
+
+        colNameToRemoveLeadingSpaces = colNameToKeep
+        colNameAfterSpacesRemoved = colNameToRemoveLeadingSpaces.lstrip()
+        unprocessed = unprocessed.rename({colNameAfterSpacesRemoved : colNameAfterSpacesRemoved})
+
+        printColsList(unprocessed)
 
         return unprocessed
 
