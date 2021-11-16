@@ -6,6 +6,7 @@ from production.defaultSetupLogger import defaultSetupLogger
 log = defaultSetupLogger(__file__)
 
 class TestReplaceColumnNameGivenWrongColumnNames(unittest.TestCase):
+    
     def __init__(self):
         self.__expectedDf= pd.DataFrame({'col1':[1,1,1]})
         self.__givenDf= pd.DataFrame({'Unnamed: 0':['col1',1,1,1]})

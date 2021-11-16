@@ -4,4 +4,5 @@ import logging
 def defaultSetupLogger(currFile) -> logging.Logger:
     currFileName = str(currFile)
     setup_logger(currFileName, currFileName + ".log")
-    return logging.getLogger(currFileName)
+    log = logging.getLogger(currFileName)
+    return log

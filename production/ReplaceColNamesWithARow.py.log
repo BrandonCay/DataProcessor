@@ -1,3 +1,0 @@
-2021-11-14 15:41:34,436 : ['Unnamed: 0']
-2021-11-14 15:41:34,436 : MESSAGE: ['Unnamed: 0']
-2021-11-14 15:41:34,437 : defaultdict(<function ReplaceColNamesWithARow.__makeDictOfOldColNamesToNewColNames.<locals>.<lambda> at 0x0000021ABBA0B820>, {'Unnamed: 0': 'Unnamed: 0'})

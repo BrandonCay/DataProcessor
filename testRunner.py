@@ -17,5 +17,5 @@ def runOne():
 
 
 if __name__ == '__main__':
-    runOne()
+    allTests()
     

@@ -10,10 +10,11 @@ class TestNormalizedCol(unittest.TestCase):
     def __init__ (self):
         listForSeries= [200,-4,90,13.9,5,-90,20,300.7,30,-200,400]
          
-        self.unnormalizedData=pd.Series(listForSeries)
+        self.__unnormalizedData = pd.Series(listForSeries)
        
         self.expectedLastNormalizedDataFromCol1= 1.000000
-        self.normalizer = Normalizer(listForSeries)
+        self.normalizer = Normalizer(self.__unnormalizedData)
+        
     def test_normalize(self):
         
         normalizedS= self.normalizer.normalize()
