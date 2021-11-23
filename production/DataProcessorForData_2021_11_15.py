@@ -3,10 +3,11 @@ from production.__absDataProcessor import absDataProcessor
 import pandas as pd
 from production.Normalizer import Normalizer
 from production.defaultSetupLogger import defaultSetupLogger
+from data.pythonData import tableET
 log = defaultSetupLogger(__file__)
 
 class DataProcessorForData_2021_11_15(absDataProcessor):
-    def __init__(self, unprocessed : pd.DataFrame) -> None:
+    def __init__(self, unprocessed = tableET) -> None:
         super().__init__(unprocessed)
 
 

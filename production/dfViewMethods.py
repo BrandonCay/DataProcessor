@@ -25,7 +25,7 @@ def copyNormalizedDataToDF(df_min_max_scaled : pd.DataFrame, listOfNormalizedDat
         
     
 
-def printCols(df:pd.DataFrame,columnsList :list):
+def printCols(df:pd.DataFrame,columnsList :list, log :log):
     for i in columnsList:
         log.debug("\n")
         log.debug(df[i] )

@@ -4,35 +4,40 @@ from production.ReplaceColNamesWithARow import ReplaceColNamesWithARow
 from production.dfViewMethods import printColsList, printCols
 from production.Normalizer import Normalizer
 from production.defaultSetupLogger import defaultSetupLogger
+from data.pythonData import newAttrTable
 log = defaultSetupLogger(__file__)
 
 class DataProcessorNewAttr(absDataProcessor):
-    def __init__(self, df: pd.DataFrame) -> None:
+    def __init__(self, df = newAttrTable) -> None:
         super().__init__(df)
-        self.__colsToRename=dict({" adjusted execution time": "adjusted execution time"})
+        self.__colsToRename = dict({" adjusted execution time": "adjusted execution time"})
         self.__colNameToKeep = str(" adjusted execution time")
         self.__colNameToDrop = "execution time"
-    
-    def process(self) -> pd.DataFrame:
+
+
+    def process(self, steps = 5) -> pd.DataFrame:
         unprocessed = self.get_unprocessed()
-        
+        printCols(unprocessed,unprocessed.columns, log)
+
         unprocessed = self.__dropNaSections(unprocessed)
 
         replacer1 = ReplaceColNamesWithARow(unprocessed)
-        
 
         unprocessed = replacer1.replaceColNamesWithARow()
         
-
         unprocessed  = self.__dropSections(unprocessed)#td: elim pass
 
-        colNameToKeep = self.__colNameToKeep
         unprocessed = self.__normalize(unprocessed)
 
-        processed = self.__renameCols(unprocessed)
+        log.debug(unprocessed)
 
-        log.debug("PROCESSED")
-        printColsList(processed, log)
+        unprocessed = self.__renameCols(unprocessed)
+
+
+        if(steps <= 5):
+            unprocessed = self.__processToETformat(unprocessed)
+        
+        processed = unprocessed
 
         return processed
 
@@ -60,8 +65,15 @@ class DataProcessorNewAttr(absDataProcessor):
                 normalizer1 = Normalizer(colToNormalize)
                 normalizedCol = normalizer1.normalize()
                 unprocessed[colNameToNormalize] = normalizedCol
-
         return unprocessed
+
+    def __processToETformat(self, unprocessed: pd.DataFrame):
+        oldColNamesToNewColNames = {" adjusted execution time": "adjusted execution time"
+        ,"Repeating times":"repeating time"}
+        processed = unprocessed.rename(columns  = oldColNamesToNewColNames)
+        return processed
+
+    
 
 
 
