@@ -1,7 +1,9 @@
 import pandas as pd
+from pandas.api.types import is_numeric_dtype
+
 
 class Normalizer:
-    def __init__(self, columnData : pd.Series):
+    def __init__(self, columnData = pd.Series()):
         self.__decimalPlaces = 15
         self.__sUnnormalized = columnData
 
@@ -16,7 +18,11 @@ class Normalizer:
         try:
             if not isinstance(s, pd.Series):
                 raise TypeError
+            if not is_numeric_dtype(s):
+                raise ValueError
 
             self.__sUnnormalized = s
         except TypeError:
             print(f"Object passed is not a Series. Object is:{str(s)}" )
+        except ValueError:
+            print(f'Column is not numeric. It is {str(s.dtype)}')

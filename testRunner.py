@@ -5,6 +5,9 @@ from tests.TestNormalizedCol import TestNormalizedCol
 from tests.TestGetNormalizedData import TestGetNormalizedData
 import pandas as pd
 from production.defaultSetupLogger import defaultSetupLogger
+from tests.TestNormalizedDf import TestNormalizedDf
+from tests.TestGetNormalizedET import TestGetNormalizedET
+from tests.TestGetIndicesWhereValsAreDifferent import TestGetIndicesWhereValsAreDifferent
 log = defaultSetupLogger(__file__)
 
 #test runner replaces the built-in test feature because I'm not too familiar with it as of 2021/11/14 
@@ -13,7 +16,7 @@ def allTests():
     tncObj.run()
 
 def runOne():
-    tObj = TestGetNormalizedData()
+    tObj = TestGetIndicesWhereValsAreDifferent()
     tObj.run()
 
 

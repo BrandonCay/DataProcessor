@@ -15,7 +15,7 @@ class TestGetNormalizedData(unittest.TestCase):
         dp =DataProcessorNewAttr(newAttrTable)
         dp = dp.process()
 
-        sampleColName = "Number of statements"
+        sampleColName = "No. of  iterations in inner"
         s = dp[sampleColName]
         self.__givenSeries=pd.Series(s)
         self.__expectedSeries = pd.Series(normalizedNewAttrTable[sampleColName])

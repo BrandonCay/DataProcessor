@@ -23,6 +23,7 @@ class DataProcessorForData_2021_11_15(absDataProcessor):
 
     def process(self) -> pd.DataFrame:
         unprocessed = self.get_unprocessed()
+        log.debug(unprocessed.columns)
         
         colToNormalize = "repeating time"
 

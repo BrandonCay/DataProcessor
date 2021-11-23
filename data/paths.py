@@ -12,12 +12,14 @@ fileName_2021_11_15 = "correct data for adjusted ET"
 absolutePathToLog = rf'C:\Users\Brandon\Documents\College\Fall2021\CS4800-CS-Seminar\researchProj\colabCode\DataProcessor\logs'
 pathToVerifiedNormalizedCSV=None
 pathToNewAttr=None
+pathToETcsv = None
 
 if(flagHome == False):
     pathToDataDir = r"C:\Users\brand\OneDrive\Documents\college\CS4800\code\DataProcessor\data"
     absolutePathToLog = r"C:\Users\brand\OneDrive\Documents\college\CS4800\code\DataProcessor\logs"
     pathToVerifiedNormalizedCSV=r"C:\Users\brand\OneDrive\Documents\college\CS4800\code\DataProcessor\data\correct pure normalized data.csv"
     pathToNewAttr=r"C:\Users\brand\OneDrive\Documents\college\CS4800\code\DataProcessor\data\new attributes for DNN.csv"
+    pathToETcsv = r"C:\Users\brand\OneDrive\Documents\college\CS4800\code\DataProcessor\data\correct data for adjusted ET.csv"
 
 
 pathToCsvFile_2021_11_15=pathToDataDir + f"\\{fileName_2021_11_15}.csv"
