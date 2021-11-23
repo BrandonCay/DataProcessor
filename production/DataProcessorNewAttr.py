@@ -7,53 +7,68 @@ from production.defaultSetupLogger import defaultSetupLogger
 log = defaultSetupLogger(__file__)
 
 class DataProcessorNewAttr(absDataProcessor):
-    def __init__(self, df: pd.DataFrame):
-        super().__init__(self, df)
+    def __init__(self, df: pd.DataFrame) -> None:
+        super().__init__(df)
+        self.__colsToRename=dict({" adjusted execution time": "adjusted execution time"})
+        self.__colNameToKeep = str(" adjusted execution time")
+        self.__colNameToDrop = "execution time"
     
     def process(self) -> pd.DataFrame:
         unprocessed = self.get_unprocessed()
-        unprocessed = unprocessed.dropna(how='all', axis=1)
-        unprocessed = unprocessed.dropna(how='all', axis=0)
+        
+        unprocessed = self.__dropNaSections(unprocessed)
 
         replacer1 = ReplaceColNamesWithARow(unprocessed)
         
-        printColsList(unprocessed)
 
         unprocessed = replacer1.replaceColNamesWithARow()
         
-        printColsList(unprocessed)
 
-        columnToDrop = "execution time"
+        unprocessed  = self.__dropSections(unprocessed)#td: elim pass
 
-        unprocessed = unprocessed.drop(columnToDrop, axis = 1)
+        colNameToKeep = self.__colNameToKeep
+        unprocessed = self.__normalize(unprocessed)
+
+        processed = self.__renameCols(unprocessed)
+
+        log.debug("PROCESSED")
+        printColsList(processed, log)
+
+        return processed
+
+    def __renameCols(self, unprocessed : pd.DataFrame) -> pd.DataFrame:
+        unprocessed = unprocessed.rename(self.__colsToRename)
+        return unprocessed
+        
+
+    def __dropSections(self, unprocessed: pd.DataFrame) -> pd.DataFrame:
+        unprocessed = unprocessed.drop(self.__colNameToDrop, axis = 1)
         unprocessed = unprocessed.drop(unprocessed.columns[0:2] , axis=1)
         unprocessed = unprocessed.drop(33 , axis=0)
+        return unprocessed
 
+    def __dropNaSections(self, unprocessed: pd.DataFrame) -> pd.DataFrame:
+        unprocessed = unprocessed.dropna(how='all', axis=1)
+        unprocessed = unprocessed.dropna(how='all', axis=0)
+        return unprocessed
 
-
-
-        printColsList(unprocessed)
-
-        printCols(unprocessed, unprocessed.columns)
-
-        colNameToKeep = " adjusted execution time"
+    def __normalize(self, unprocessed : pd.DataFrame ) -> pd.DataFrame:
         for colNameToNormalize in unprocessed.columns:
-            if( colNameToNormalize!= colNameToKeep):
+            if( colNameToNormalize!= self.__colNameToKeep):
                 colToNormalize = unprocessed[colNameToNormalize]
                 colToNormalize = pd.to_numeric(colToNormalize) # assumes all are numeric
                 normalizer1 = Normalizer(colToNormalize)
                 normalizedCol = normalizer1.normalize()
                 unprocessed[colNameToNormalize] = normalizedCol
 
-        printColsList(unprocessed)
-
-        log.debug(unprocessed[:3])
-
-        colNameToRemoveLeadingSpaces = colNameToKeep
-        colNameAfterSpacesRemoved = colNameToRemoveLeadingSpaces.lstrip()
-        unprocessed = unprocessed.rename({colNameAfterSpacesRemoved : colNameAfterSpacesRemoved})
-
-        printColsList(unprocessed)
-
         return unprocessed
+
+
+
+        
+
+        
+        
+        
+        
 

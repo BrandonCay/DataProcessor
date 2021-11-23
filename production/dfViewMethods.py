@@ -1,12 +1,13 @@
 from production.defaultSetupLogger import defaultSetupLogger
 import pandas as pd
+from logging import Logger
+
 log = defaultSetupLogger(__file__)    
 
 
 
-def printColsList(df : pd.DataFrame):
+def printColsList(df : pd.DataFrame, log: Logger):
     columnsList = df.columns
-
     log.debug(columnsList)
 
     

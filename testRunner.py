@@ -1,6 +1,8 @@
 from tests.TestNormalizedCol import  TestNormalizedCol
 from tests.TestPandasAssertEqualGivenSelf import TestPandasAssertEqualGivenSelf
 from tests.TestReplaceColumnNameGivenWrongColumnNames import TestReplaceColumnNameGivenWrongColumnNames
+from tests.TestNormalizedCol import TestNormalizedCol
+from tests.TestGetNormalizedData import TestGetNormalizedData
 import pandas as pd
 from production.defaultSetupLogger import defaultSetupLogger
 log = defaultSetupLogger(__file__)
@@ -11,11 +13,10 @@ def allTests():
     tncObj.run()
 
 def runOne():
-    tObj = TestReplaceColumnNameGivenWrongColumnNames()
+    tObj = TestGetNormalizedData()
     tObj.run()
-    
 
 
 if __name__ == '__main__':
-    allTests()
+    runOne()
     
