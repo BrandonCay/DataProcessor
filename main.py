@@ -8,6 +8,7 @@ from production.DataProcessorForData_2021_11_15 import DataProcessorForData_2021
 from production.dfViewMethods import printCols
 from production.ComparerOfTwoTables import ComparerOfTwoTables
 from data.pythonData import tableET, newAttrTable
+from production.ColumnNameToIndices import ColumnNameToIndices
 
 
 log = defaultSetupLogger(__file__)
@@ -21,22 +22,37 @@ No. of Iteration: 13 gets converted to 12.5
 
 
 def main():
-    indices = getIndices()
-    log.debug("INDICES\n")
-    log.debug(indices)
-
-def getIndices():
     dp = DataProcessorForData_2021_11_15()
     processed_2021_11_15 = dp.process()
 
     dp = DataProcessorNewAttr(newAttrTable)
     processed_New_Attr = dp.process()
+    
+    ct = makeComparer(processed_2021_11_15, processed_New_Attr)
+
+    indices = getIndices(ct)
+
+    vals = getValues(process_2021_11_15)
+    
+    log.debug(vals)
+
+def makeComparer(df1, df2):
 
 
 
     ct = ComparerOfTwoTables(processed_2021_11_15, processed_New_Attr)
+    return ct
     
+
+
+def getIndices(ct : ComparerOfTwoTables):
     return ct.getIndices()
+
+def getValues(df1 : pd.DataFrame, indices : list):
+    cToi = ColumnNameToIndices(indices)
+    vals = cToi.indexInto(df1)
+    return vals
+
 
     
 
