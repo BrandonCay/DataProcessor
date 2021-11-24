@@ -32,15 +32,16 @@ def main():
 
     indices = getIndices(ct)
 
-    vals = getValues(process_2021_11_15)
+    vals = getValues(processed_2021_11_15, indices)
     
-    log.debug(vals)
+    log.debug(f"\n{indices}")
+    log.debug(f"\n{vals}")
 
 def makeComparer(df1, df2):
 
 
 
-    ct = ComparerOfTwoTables(processed_2021_11_15, processed_New_Attr)
+    ct = ComparerOfTwoTables(df1, df2)
     return ct
     
 
