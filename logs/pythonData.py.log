@@ -1,11 +1,9 @@
-11 : 2021-11-23 19:12:36,271 :        Unnamed: 22  Unnamed: 24  Unnamed: 25  ...  Unnamed: 31  Unnamed: 32  Unnamed: 33
-count          0.0          0.0          0.0  ...          0.0          0.0          0.0
-mean           NaN          NaN          NaN  ...          NaN          NaN          NaN
-std            NaN          NaN          NaN  ...          NaN          NaN          NaN
-min            NaN          NaN          NaN  ...          NaN          NaN          NaN
-25%            NaN          NaN          NaN  ...          NaN          NaN          NaN
-50%            NaN          NaN          NaN  ...          NaN          NaN          NaN
-75%            NaN          NaN          NaN  ...          NaN          NaN          NaN
-max            NaN          NaN          NaN  ...          NaN          NaN          NaN
-
-[8 rows x 11 columns]
+11 : 2021-11-25 17:48:43,298 :        Unnamed: 22  Unnamed: 24  Unnamed: 25  Unnamed: 26  Unnamed: 27  Unnamed: 28  Unnamed: 29  Unnamed: 30  Unnamed: 31  Unnamed: 32  Unnamed: 33
+count          0.0          0.0          0.0          0.0          0.0          0.0          0.0          0.0          0.0          0.0          0.0
+mean           NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+std            NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+min            NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+25%            NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+50%            NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+75%            NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN
+max            NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN          NaN

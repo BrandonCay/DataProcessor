@@ -8,6 +8,8 @@ from production.defaultSetupLogger import defaultSetupLogger
 from tests.TestNormalizedDf import TestNormalizedDf
 from tests.TestGetNormalizedET import TestGetNormalizedET
 from tests.TestGetIndicesWhereValsAreDifferent import TestGetIndicesWhereValsAreDifferent
+from tests.TestFormattedOfUnionData import TestFormattedOfUnionData
+
 log = defaultSetupLogger(__file__)
 
 #test runner replaces the built-in test feature because I'm not too familiar with it as of 2021/11/14 
@@ -16,7 +18,7 @@ def allTests():
     tncObj.run()
 
 def runOne():
-    tObj = TestGetIndicesWhereValsAreDifferent()
+    tObj = TestFormattedOfUnionData()
     tObj.run()
 
 

@@ -1,7 +1,8 @@
 import pandas as pd
+from pandas.core.frame import DataFrame
 from production.DataProcessorNewAttr import DataProcessorNewAttr
 from production.Normalizer import Normalizer
-from data.paths import pathToCsv, pathToDataDir, pathToDataDirWithOs,pathToCsvFile_2021_11_15
+from data.paths import pathToCsv, makePathsToFilesInDataDir,pathToCsvFile_2021_11_15
 from production.defaultSetupLogger import defaultSetupLogger
 from production.ReplaceColNamesWithARow import ReplaceColNamesWithARow
 from production.DataProcessorForData_2021_11_15 import DataProcessorForData_2021_11_15
@@ -37,10 +38,8 @@ def main():
     log.debug(f"\n{indices}")
     log.debug(f"\n{vals}")
 
+
 def makeComparer(df1, df2):
-
-
-
     ct = ComparerOfTwoTables(df1, df2)
     return ct
     
@@ -53,6 +52,17 @@ def getValues(df1 : pd.DataFrame, indices : list):
     cToi = ColumnNameToIndices(indices)
     vals = cToi.indexInto(df1)
     return vals
+
+             
+        
+                
+
+        
+        
+        
+    
+def formatDifferentData():
+    
 
 
     
@@ -70,7 +80,7 @@ def process_2021_11_15():
     
 
 def exportFile(processed: pd.DataFrame , nameOfFile : str) -> None:
-    processed.to_csv(pathToDataDir + f"\\{nameOfFile}.csv", index=False)
+    processed.to_csv(makePathsToFilesInDataDir(f"\\{nameOfFile}.csv"), index=False)
 
 
 """
