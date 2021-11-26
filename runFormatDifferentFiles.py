@@ -14,15 +14,16 @@ def main():
     dataframes = [correctPure, processed_New_Attr, processed_2021_11_15, ]
     ct = ComparerOfTwoTables(processed_New_Attr, processed_2021_11_15)
     indices = ct.getIndices()
-    dfNames = ["correct pure normalized (github)", "processed_New_Attr (normalized)" , "processed_2021_11_15 (ET) (normalized)"]]
+    dfNames = ["correct pure normalized (github)", "processed_New_Attr (normalized)" , "processed_2021_11_15 (ET) (normalized)"]
     formatter = UnionOfDataFormatter(dataframes, dfNames)
     df = formatter.getDataAtLocations(indices)
-    log.debug(df.describe())
+    df.to_csv("data/differentVals.csv", index=False)
+
 
     
 
 
-if(__name__ == '__main__')
+if(__name__ == '__main__'):
     main()
 
     

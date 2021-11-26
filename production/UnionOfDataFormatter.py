@@ -14,30 +14,28 @@ class UnionOfDataFormatter:
         colNamesOfFormattedData = ["colName" , "indices"] + self.__names 
         valuesToAppendToFormattedData = []
         #indiciesOfFormattedColData = self.__makeIndexNameToIndexNumber(colNames)
-
+        indexOfColOfFormattedData=0 
         for colName in colNameToIndices.keys():
 
             indices = colNameToIndices[colName]
-            indexOfColOfFormattedData=0 
             for index in indices:
                 valuesToAppendToFormattedData.append([]) #create list for row
                 valuesToAppendToFormattedData[indexOfColOfFormattedData].append(colName)
                 valuesToAppendToFormattedData[indexOfColOfFormattedData].append(index)
                 for df in self.__dataframes:
                     dataAtLocation = None
-                    if colName in df:
+                    if colName in df and index >= 0:
                         dataAtLocation = df[colName][index]
                     
                     valuesToAppendToFormattedData[indexOfColOfFormattedData].append(dataAtLocation)
 
                 indexOfColOfFormattedData+=1
 
-                log.debug(valuesToAppendToFormattedData)
 
-        log.debug( valuesToAppendToFormattedData)
-        log.debug( colNamesOfFormattedData )   
+        log.debug( str(valuesToAppendToFormattedData) + "\n")
+        log.debug( colNamesOfFormattedData )  
 
-        formattedData = pd.DataFrame(valuesToAppendToFormattedData , columns = colNamesOfFormattedData )
+        formattedData = pd.DataFrame(data = valuesToAppendToFormattedData , columns = colNamesOfFormattedData )
         return formattedData
     
     def __makeIndexNameToIndexNumber(self, keyValues : list , indexToStopAt : int) -> dict:

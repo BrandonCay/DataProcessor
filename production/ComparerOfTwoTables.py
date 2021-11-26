@@ -13,7 +13,7 @@ class ComparerOfTwoTables:
         self.__comparisonData = comparisonData
         self.__absoluteTolerance = 1e-3
 
-    def getIndices(self) -> list:        
+    def getIndices(self) -> dict:        
         colNameToIndices = {}
         for colName in self.__referenceData.columns:
             if(self.__isNumeric(self.__referenceData[colName]) and self.__isNumeric(self.__comparisonData[colName])):
