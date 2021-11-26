@@ -23,12 +23,6 @@ No. of Iteration: 13 gets converted to 12.5
 
 
 def main():
-    dp = DataProcessorForData_2021_11_15()
-    processed_2021_11_15 = dp.process()
-
-    dp = DataProcessorNewAttr(newAttrTable)
-    processed_New_Attr = dp.process()
-    
     ct = makeComparer(processed_2021_11_15, processed_New_Attr)
 
     indices = getIndices(ct)
