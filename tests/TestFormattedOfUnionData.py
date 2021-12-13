@@ -17,6 +17,7 @@ class TestFormattedOfUnionData(unittest.TestCase):
         resDf = formatter.getDataAtLocations(indices)
         log.debug(resDf)
         log.debug(self.__expectedDf)
+        
         assert_frame_equal(self.__expectedDf, resDf)
     
     def run(self):
